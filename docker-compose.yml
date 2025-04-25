@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: blog_db
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5433:5432"
+    volumes:
+      - blog_db_data:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    container_name: blog_api
+    env_file: .env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+volumes:
+  blog_db_data:
