@@ -6,7 +6,7 @@ export class UserService {
         private userRepository: IUserRepository
     ) {}
 
-    async getUsers(limit: number, page: number) {
+    async getUser(limit: number, page: number) {
         return this.userRepository.getUser(limit, page);
     }
 
@@ -26,7 +26,7 @@ export class UserService {
     async createUser(user: User) {
         const userExists = await this.userRepository.getUserByEmail(user.email);
         if (userExists) {
-            throw new Error('User with this e-mail already exists.');
+            throw new Error('User with this email already exists.');
         }
         return this.userRepository.createUser(user);
     }

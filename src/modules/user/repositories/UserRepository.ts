@@ -34,7 +34,7 @@ export class UserRepository implements IUserRepository {
     }
 
     async updateUser(id: number, user: Partial<User>): Promise<User | null> {
-        this.repository.update(id, user);
+        await this.repository.update(id, user);
         return this.getUserById(id);
     }
 
